@@ -10,6 +10,8 @@ namespace QuickCalc
 	public class ViewModel : INotifyPropertyChanged
 	{
 		public ICommand NumberPress { get; set; }
+		public ICommand OperatorPress { get; set; }
+		public ICommand Calculate { get; set; }
 
 		private string _numberDisplay = "0";
 
