@@ -7,6 +7,11 @@
 	<Window.DataContext>
 		<local:ViewModel/>
 	</Window.DataContext>
+	<Window.Resources>
+        <Style x:Key="BlueButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="Blue"/>
+        </Style>
+    </Window.Resources>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -22,15 +27,23 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 
-		<Border Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="2"
-				Margin="10" Padding="10">
-			<TextBlock Text="{Binding NumberDisplay}"/>
-		</Border>
+		<ContentControl Content="{Binding}"
+						Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="2"
+						Margin="10" Padding="10">
+			<ContentControl.Template>
+				<ControlTemplate TargetType="{x:Type ContentControl}">
+					<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+							Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+						<ContentPresenter/>
+					</Border>
+				</ControlTemplate>
+			</ContentControl.Template>
+		</ContentControl>
 		
 		<Button Grid.Row="1" Grid.Column="0" Command="{Binding NumberPress}" CommandParameter="9">9</Button>
 		<Button Grid.Row="1" Grid.Column="1" Command="{Binding NumberPress}" CommandParameter="8">8</Button>
 		<Button Grid.Row="1" Grid.Column="2" Command="{Binding NumberPress}" CommandParameter="7">7</Button>
-		<Button Grid.Row="2" Grid.Column="0" Command="{Binding NumberPress}" CommandParameter="6">6</Button>
+        <Button Grid.Row="2" Grid.Column="0" Command="{Binding NumberPress}" CommandParameter="6" Style="{StaticResource BlueButton}">6</Button>
 		<Button Grid.Row="2" Grid.Column="1" Command="{Binding NumberPress}" CommandParameter="5">5</Button>
 		<Button Grid.Row="2" Grid.Column="2" Command="{Binding NumberPress}" CommandParameter="4">4</Button>
 		<Button Grid.Row="3" Grid.Column="0" Command="{Binding NumberPress}" CommandParameter="3">3</Button>
